@@ -1,0 +1,5 @@
+@type 2
+@spawn default
+---
+stone: [0, 0, 0]
+end
