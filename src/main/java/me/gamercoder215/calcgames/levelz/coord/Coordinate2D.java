@@ -1,13 +1,14 @@
 package me.gamercoder215.calcgames.levelz.coord;
 
 import me.gamercoder215.calcgames.levelz.Dimension;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 /**
  * Represents a 2-Dimensional Coordinate.
  */
-public class Coordinate2D implements Coordinate {
+public final class Coordinate2D implements Coordinate {
 
     private double x, y;
 
@@ -123,6 +124,20 @@ public class Coordinate2D implements Coordinate {
 
     @Override
     public String toString() {
-        return "2D{x=" + x + ", y=" + y + '}';
+        return "[" + x + ", " + y + "]";
+    }
+
+    /**
+     * Parses a 2D Coordinate from a string.
+     * @param point String
+     * @return 2D Coordinate
+     */
+    @NotNull
+    public static Coordinate2D fromString(String point) {
+        String point0 = point.trim().replaceAll("[\\[\\]\\s]", "");
+        String[] parts = point0.split(",");
+        double x = Double.parseDouble(parts[0]), y = Double.parseDouble(parts[1]);
+
+        return new Coordinate2D(x, y);
     }
 }

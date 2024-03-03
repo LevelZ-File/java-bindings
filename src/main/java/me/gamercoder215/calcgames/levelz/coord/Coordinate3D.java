@@ -1,13 +1,14 @@
 package me.gamercoder215.calcgames.levelz.coord;
 
 import me.gamercoder215.calcgames.levelz.Dimension;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 /**
  * Represents a 3-Dimensional Coordinate.
  */
-public class Coordinate3D implements Coordinate {
+public final class Coordinate3D implements Coordinate {
 
     private double x, y, z;
 
@@ -129,6 +130,20 @@ public class Coordinate3D implements Coordinate {
 
     @Override
     public String toString() {
-        return "3D{x=" + x + ", y=" + y + ", z=" + z + '}';
+        return "[" + x + ", " + y + ", " + z + "]";
+    }
+
+    /**
+     * Parses a 3D Coordinate from a string.
+     * @param point String
+     * @return 3D Coordinate
+     */
+    @NotNull
+    public static Coordinate3D fromString(String point) {
+        String point0 = point.trim().replaceAll("[\\[\\]\\s]", "");
+        String[] parts = point0.split(",");
+        double x = Double.parseDouble(parts[0]), y = Double.parseDouble(parts[1]), z = Double.parseDouble(parts[2]);
+
+        return new Coordinate3D(x, y, z);
     }
 }
