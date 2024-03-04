@@ -43,6 +43,17 @@ tasks {
         }
     }
 
+    javadoc {
+        title = "LevelZ Java API v$version"
+        sourceSets["main"].allJava.srcDir("src/main/javadoc")
+
+        options {
+            require(this is StandardJavadocDocletOptions)
+
+            overview = "src/main/javadoc/overview.html"
+        }
+    }
+
     test {
         useJUnitPlatform()
         testLogging {
