@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
-import java.util.function.Function;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -198,11 +197,13 @@ interface InternalParser {
 
             Map<String, Double> blockToChance = new HashMap<>();
             for (String b : blocks) {
-                String[] split0 = b.split("=");
-                if (split0.length == 1)
-                    blockToChance.put(split0[0], 1.0 / l);
-                else
+                String[] split0 = b.split("=", 2);
+                try {
                     blockToChance.put(split0[1], Double.parseDouble(split0[0]));
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    blockToChance.put(b, 1.0 / l);
+                }
+
             }
 
             block = readRawBlock(roll(blockToChance, seed));
@@ -245,31 +246,27 @@ interface InternalParser {
         if (is2D)
             headers.putIfAbsent("scroll", "none");
 
-        Map<Block, Coordinate[]> blocks = new HashMap<>();
+        Set<LevelObject> blocks = new HashSet<>();
         for (String line : split[1]) {
             if (line.equalsIgnoreCase(Keywords.END)) break;
 
-            if (is2D)
-                blocks.putAll(read2DLine(line, seed));
-            else
-                blocks.putAll(read3DLine(line, seed));
+            if (is2D) {
+                Map<Block, Coordinate2D[]> blocks2D = read2DLine(line, seed);
+                blocks2D.forEach((k, v) -> {
+                    for (Coordinate2D c : v) blocks.add(new LevelObject(k, c));
+                });
+            } else {
+                Map<Block, Coordinate3D[]> blocks3D = read3DLine(line, seed);
+                blocks3D.forEach((k, v) -> {
+                    for (Coordinate3D c : v) blocks.add(new LevelObject(k, c));
+                });
+            }
         }
 
-        if (is2D) {
-            Map<Block, Coordinate2D[]> blocks2D = blocks.entrySet()
-                    .stream()
-                    .map(e -> Map.entry(e.getKey(), (Coordinate2D[]) e.getValue()))
-                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-            level = new Level2D(headers, blocks2D);
-        } else {
-            Map<Block, Coordinate3D[]> blocks3D = blocks.entrySet()
-                    .stream()
-                    .map(e -> Map.entry(e.getKey(), (Coordinate3D[]) e.getValue()))
-                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-            level = new Level3D(headers, blocks3D);
-        }
+        if (is2D)
+            level = new Level2D(headers, blocks);
+        else
+            level = new Level3D(headers, blocks);
 
         return level;
     }

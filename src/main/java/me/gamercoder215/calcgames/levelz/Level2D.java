@@ -5,9 +5,7 @@ import me.gamercoder215.calcgames.levelz.coord.Coordinate2D;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,14 +14,16 @@ import java.util.stream.Stream;
  */
 public class Level2D extends Level {
 
-    private final Map<Block, Coordinate2D[]> blocks = new HashMap<>();
+    private final Set<LevelObject> blocks = new HashSet<>();
     private final Coordinate2D spawn;
+    private final Scroll scroll;
 
     /**
      * Creates an empty 2D Level.
      */
     public Level2D() {
         this.spawn = new Coordinate2D(0, 0);
+        this.scroll = Scroll.NONE;
     }
 
     /**
@@ -33,6 +33,7 @@ public class Level2D extends Level {
     public Level2D(@NotNull Map<String, String> headers) {
         super(headers);
         this.spawn = Coordinate2D.fromString(headers.get("spawn"));
+        this.scroll = Scroll.valueOf(headers.get("scroll").replace('-', '_').toUpperCase());
     }
 
     /**
@@ -40,9 +41,18 @@ public class Level2D extends Level {
      * @param headers Level Headers
      * @param blocks Level Blocks
      */
-    public Level2D(@NotNull Map<String, String> headers, @NotNull Map<Block, Coordinate2D[]> blocks) {
+    public Level2D(@NotNull Map<String, String> headers, @NotNull Collection<LevelObject> blocks) {
         this(headers);
-        this.blocks.putAll(blocks);
+        this.blocks.addAll(blocks);
+    }
+
+    /**
+     * Gets the scroll direction for this 2D Level.
+     * @return Level Scroll Direction
+     */
+    @NotNull
+    public Scroll getScroll() {
+        return scroll;
     }
 
     @Override
@@ -52,17 +62,16 @@ public class Level2D extends Level {
 
     @Override
     public Set<Coordinate> getCoordinates() {
-        return blocks.values()
-                .stream()
-                .flatMap(Stream::of)
+        return blocks.stream()
+                .map(LevelObject::getCoordinate)
                 .collect(Collectors.toUnmodifiableSet());
     }
 
     @Override
     @NotNull
     @Unmodifiable
-    public Map<Block, Coordinate2D[]> getBlocks() {
-        return Map.copyOf(blocks);
+    public Set<LevelObject> getBlocks() {
+        return Set.copyOf(blocks);
     }
 
     @Override

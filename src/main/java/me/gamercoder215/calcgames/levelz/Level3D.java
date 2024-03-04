@@ -5,18 +5,15 @@ import me.gamercoder215.calcgames.levelz.coord.Coordinate3D;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Represents a 3D level.
  */
 public class Level3D extends Level {
 
-    private final Map<Block, Coordinate3D[]> blocks = new HashMap<>();
+    private final Set<LevelObject> blocks = new HashSet<>();
     private final Coordinate3D spawn;
 
     /**
@@ -36,13 +33,13 @@ public class Level3D extends Level {
     }
 
     /**
-     * Creates a new 2D Level with the given headers and blocks.
+     * Creates a new 3D Level with the given headers and blocks.
      * @param headers Level Headers
      * @param blocks Level Blocks
      */
-    public Level3D(@NotNull Map<String, String> headers, @NotNull Map<Block, Coordinate3D[]> blocks) {
+    public Level3D(@NotNull Map<String, String> headers, @NotNull Collection<LevelObject> blocks) {
         this(headers);
-        this.blocks.putAll(blocks);
+        this.blocks.addAll(blocks);
     }
 
     @Override
@@ -52,22 +49,21 @@ public class Level3D extends Level {
 
     @Override
     public Set<Coordinate> getCoordinates() {
-        return blocks.values()
-                .stream()
-                .flatMap(Stream::of)
+        return blocks.stream()
+                .map(LevelObject::getCoordinate)
                 .collect(Collectors.toUnmodifiableSet());
     }
 
     @Override
     @NotNull
     @Unmodifiable
-    public Map<Block, Coordinate3D[]> getBlocks() {
-        return Map.copyOf(blocks);
+    public Set<LevelObject> getBlocks() {
+        return Set.copyOf(blocks);
     }
 
     @Override
-    public Level2D clone() {
-        return (Level2D) super.clone();
+    public Level3D clone() {
+        return (Level3D) super.clone();
     }
 
 }

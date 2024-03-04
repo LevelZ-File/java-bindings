@@ -55,4 +55,10 @@ public final class Block {
     public int hashCode() {
         return Objects.hash(name, properties);
     }
+
+    @Override
+    public String toString() {
+        if (properties.isEmpty()) return name;
+        return name + "<" + properties + ">";
+    }
 }

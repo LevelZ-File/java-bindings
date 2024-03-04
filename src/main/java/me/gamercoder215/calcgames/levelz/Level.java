@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Represents a LevelZ level.
  */
-public abstract class Level implements Iterable<Coordinate>, Cloneable {
+public abstract class Level implements Iterable<LevelObject>, Cloneable {
 
     private final Map<String, String> headers = new HashMap<>();
 
@@ -60,7 +60,7 @@ public abstract class Level implements Iterable<Coordinate>, Cloneable {
      */
     @NotNull
     @Unmodifiable
-    public abstract Map<Block, ? extends Coordinate[]> getBlocks();
+    public abstract Set<LevelObject> getBlocks();
 
     @Override
     public Level clone() {
@@ -72,7 +72,7 @@ public abstract class Level implements Iterable<Coordinate>, Cloneable {
     }
 
     @Override
-    public final Iterator<Coordinate> iterator() {
-        return getCoordinates().iterator();
+    public final Iterator<LevelObject> iterator() {
+        return getBlocks().iterator();
     }
 }
