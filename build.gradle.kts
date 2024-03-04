@@ -37,6 +37,12 @@ tasks {
         options.compilerArgs.addAll(listOf("-Xlint:all", "-Xlint:-processing"))
     }
 
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = jvm.toString()
+        }
+    }
+
     test {
         useJUnitPlatform()
         testLogging {
