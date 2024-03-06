@@ -4,6 +4,7 @@ plugins {
     java
     `maven-publish`
     jacoco
+    signing
 }
 
 val jvm = JavaVersion.VERSION_11
@@ -30,6 +31,10 @@ dependencies {
 }
 
 tasks {
+    assemble {
+        dependsOn("javadocJar", "sourcesJar")
+    }
+
     compileJava {
         options.encoding = "UTF-8"
         options.isDeprecation = false
@@ -71,6 +76,55 @@ tasks {
 
             html.required.set(true)
             html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+        }
+    }
+
+    register("sourcesJar", Jar::class) {
+        dependsOn(classes)
+
+        archiveClassifier.set("sources")
+        from(sourceSets["main"].allJava)
+    }
+
+    register("javadocJar", Jar::class) {
+        dependsOn(javadoc)
+
+        archiveClassifier.set("javadoc")
+        from(javadoc)
+    }
+}
+
+artifacts {
+    add("archives", tasks["sourcesJar"])
+    add("archives", tasks["javadocJar"])
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "me.gamercoder215.calcgames"
+            artifactId = "levelz-java"
+
+            pom {
+                name = "LevelZ Java API"
+                description = "The Java API for LevelZ"
+                url = "https://levelz.gamercoder215.me"
+
+                licenses {
+                    license {
+                        name = "MIT License"
+                        url = "https://opensource.org/licenses/MIT"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git://github.com/LevelZ-File/java-bindings.git"
+                    developerConnection = "scm:git:ssh://github.com/LevelZ-File/java-bindings.git"
+                    url = "https://github.com/LevelZ-File/java-bindings"
+                }
+            }
+
+            from(components["java"])
         }
     }
 }
