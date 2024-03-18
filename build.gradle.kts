@@ -31,9 +31,6 @@ dependencies {
 }
 
 tasks {
-    assemble {
-        dependsOn("javadocJar", "sourcesJar")
-    }
 
     compileJava {
         options.encoding = "UTF-8"
@@ -77,6 +74,10 @@ tasks {
             html.required.set(true)
             html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
         }
+    }
+
+    jar {
+        dependsOn("javadocJar", "sourcesJar")
     }
 
     register("sourcesJar", Jar::class) {
