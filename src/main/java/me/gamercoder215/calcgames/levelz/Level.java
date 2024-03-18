@@ -29,15 +29,7 @@ public abstract class Level implements Iterable<LevelObject>, Cloneable {
         this.headers.putAll(headers);
     }
 
-    /**
-     * Gets an immutable copy of the raw headers for this level.
-     * @return Level Headers
-     */
-    @NotNull
-    @Unmodifiable
-    public final Map<String, String> getHeaders() {
-        return Map.copyOf(headers);
-    }
+    // Implementation
 
     /**
      * Gets the spawn point for this level.
@@ -61,6 +53,18 @@ public abstract class Level implements Iterable<LevelObject>, Cloneable {
     @NotNull
     @Unmodifiable
     public abstract Set<LevelObject> getBlocks();
+
+    // Default
+
+    /**
+     * Gets an immutable copy of the raw headers for this level.
+     * @return Level Headers
+     */
+    @NotNull
+    @Unmodifiable
+    public final Map<String, String> getHeaders() {
+        return Map.copyOf(headers);
+    }
 
     @Override
     public Level clone() {

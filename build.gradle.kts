@@ -10,7 +10,7 @@ plugins {
 val jvm = JavaVersion.VERSION_11
 
 group = "me.gamercoder215.calcgames"
-version = "0.1.0"
+version = "0.1.1"
 
 java {
     sourceCompatibility = jvm
@@ -31,9 +31,6 @@ dependencies {
 }
 
 tasks {
-    assemble {
-        dependsOn("javadocJar", "sourcesJar")
-    }
 
     compileJava {
         options.encoding = "UTF-8"
@@ -77,6 +74,10 @@ tasks {
             html.required.set(true)
             html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
         }
+    }
+
+    jar {
+        dependsOn("javadocJar", "sourcesJar")
     }
 
     register("sourcesJar", Jar::class) {
