@@ -43,6 +43,26 @@ public final class Block {
         return Map.copyOf(properties);
     }
 
+    /**
+     * Creates a new Block with the given name and these properties.
+     * @param name Block Name
+     * @return New Block
+     */
+    @NotNull
+    public Block withName(@NotNull String name) {
+        return new Block(name, properties);
+    }
+
+    /**
+     * Creates a new Block with this name and the given properties.
+     * @param properties Block Properties
+     * @return New Block
+     */
+    @NotNull
+    public Block withProperties(@NotNull Map<String, Object> properties) {
+        return new Block(name, properties);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
