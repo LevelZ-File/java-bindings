@@ -10,7 +10,7 @@ plugins {
 val jvm = JavaVersion.VERSION_11
 
 group = "me.gamercoder215.calcgames"
-version = "0.1.0"
+version = "0.1.1"
 
 java {
     sourceCompatibility = jvm
