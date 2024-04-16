@@ -2,8 +2,8 @@
 
 > Java & Kotlin Parser & API For LevelZ File Format
 
-[![](https://jitpack.io/v/LevelZ-File/java-bindings.svg)](https://jitpack.io/#LevelZ-File/java-bindings)
-[![JitCi](https://jitci.com/gh/LevelZ-File/java-bindings/svg)](https://jitci.com/gh/LevelZ-File/java-bindings)
+[![JitPack](https://jitpack.io/v/LevelZ-File/java-bindings.svg)](https://jitpack.io/#LevelZ-File/java-bindings)
+![GitHub Release](https://img.shields.io/github/v/release/LevelZ-File/java-bindings)
 
 ## Overview
 
