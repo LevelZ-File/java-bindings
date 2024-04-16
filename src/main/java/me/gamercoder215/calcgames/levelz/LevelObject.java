@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Utility Object for representing a Level Block and its Coordinate.
  */
-public final class LevelObject {
+public final class LevelObject implements Comparable<LevelObject> {
 
     private final Block block;
     private final Coordinate coordinate;
@@ -57,5 +57,10 @@ public final class LevelObject {
     @Override
     public String toString() {
         return block + ": " + coordinate;
+    }
+
+    @Override
+    public int compareTo(LevelObject o) {
+        return coordinate.compareTo(o.coordinate);
     }
 }

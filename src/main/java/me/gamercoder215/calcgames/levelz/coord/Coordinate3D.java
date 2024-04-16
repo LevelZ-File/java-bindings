@@ -130,7 +130,12 @@ public final class Coordinate3D implements Coordinate {
 
     @Override
     public String toString() {
-        return "[" + x + ", " + y + ", " + z + "]";
+        int xInt = (int) x, yInt = (int) y, zInt = (int) z;
+        String xs = x == xInt ? String.valueOf(xInt) : String.valueOf(x);
+        String ys = y == yInt ? String.valueOf(yInt) : String.valueOf(y);
+        String zs = z == zInt ? String.valueOf(zInt) : String.valueOf(z);
+
+        return "[" + xs + ", " + ys + ", " + zs + "]";
     }
 
     /**

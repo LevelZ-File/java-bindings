@@ -5,6 +5,7 @@ import me.gamercoder215.calcgames.levelz.coord.Coordinate;
 import me.gamercoder215.calcgames.levelz.coord.Coordinate2D;
 import me.gamercoder215.calcgames.levelz.coord.Coordinate3D;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.HashMap;
@@ -72,14 +73,39 @@ public final class LevelBuilder {
     }
 
     /**
-     * Sets a header value.
-     * @param key Header Key
-     * @param value Header Value
+     * Sets the scroll direction for the level.
+     * @param scroll Scroll Direction
      * @return this class, for chaining
+     * @throws IllegalArgumentException If the level is not 2D
      */
     @NotNull
-    public LevelBuilder header(@NotNull String key, @NotNull String value) {
-        headers.put(key, value);
+    public LevelBuilder scroll(@Nullable Scroll scroll) throws IllegalArgumentException {
+        if (!dimension.is2D())
+            throw new IllegalArgumentException("Scroll is only supported for 2D levels");
+        
+        if (scroll == null) 
+            headers.remove("scroll");
+        else 
+            headers.put("scroll", scroll.name().toLowerCase());
+        
+        return this;
+    }
+
+    /**
+     * Sets a header value.
+     * @param key Header Key
+     * @param value Header Value, can be null
+     * @return this class, for chaining
+     * @throws IllegalArgumentException If the key is null
+     */
+    @NotNull
+    public LevelBuilder header(@NotNull String key, @Nullable String value) throws IllegalArgumentException {
+        if (key == null) throw new IllegalArgumentException("Key cannot be null");
+
+        if (value == null)
+            headers.remove(key);
+        else 
+            headers.put(key, value);
         return this;
     }
 

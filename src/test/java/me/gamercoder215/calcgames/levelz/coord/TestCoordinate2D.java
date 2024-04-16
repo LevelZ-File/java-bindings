@@ -26,16 +26,20 @@ public class TestCoordinate2D {
         Assertions.assertEquals(new Coordinate2D(0.5, 1), Coordinate2D.fromString("[0.5, 1.0]"));
 
         Coordinate2D a = new Coordinate2D(0, 0);
-        Assertions.assertEquals(a.toString(), "[0.0, 0.0]");
+        Assertions.assertEquals(a.toString(), "[0, 0]");
         Assertions.assertEquals(a, Coordinate2D.fromString(a.toString()));
 
         Coordinate2D b = new Coordinate2D(3, 4);
-        Assertions.assertEquals(b.toString(), "[3.0, 4.0]");
+        Assertions.assertEquals(b.toString(), "[3, 4]");
         Assertions.assertEquals(b, Coordinate2D.fromString(b.toString()));
 
         Coordinate2D c = new Coordinate2D(2.5, -1.25);
         Assertions.assertEquals(c.toString(), "[2.5, -1.25]");
         Assertions.assertEquals(c, Coordinate2D.fromString(c.toString()));
+
+        Coordinate2D d = new Coordinate2D(-7, 9.5);
+        Assertions.assertEquals(d.toString(), "[-7, 9.5]");
+        Assertions.assertEquals(d, Coordinate2D.fromString(d.toString()));
     }
 
 }

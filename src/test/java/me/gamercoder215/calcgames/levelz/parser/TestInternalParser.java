@@ -7,15 +7,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import static me.gamercoder215.calcgames.levelz.parser.InternalParser.*;
 
