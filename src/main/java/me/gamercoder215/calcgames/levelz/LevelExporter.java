@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Represents a class that exports a LevelZ Level to a file.
@@ -67,8 +70,19 @@ public final class LevelExporter {
         }
 
         if (includeData) {
-            for (LevelObject block : level.getBlocks())
-                builder.append(block.toString()).append(lineSeparator);
+            Map<Block, String> blockMap = new HashMap<>();
+            List<LevelObject> blocks = level.getBlocks().stream()
+                .sorted()
+                .collect(Collectors.toList());
+            
+            for (LevelObject block : blocks)
+                if (blockMap.containsKey(block.getBlock()))
+                    blockMap.put(block.getBlock(), blockMap.get(block.getBlock()) + "*" + block.getCoordinate().toString());
+                else
+                    blockMap.put(block.getBlock(), block.getCoordinate().toString());
+            
+            for (Map.Entry<Block, String> entry : blockMap.entrySet())
+                builder.append(entry.getKey()).append(": ").append(entry.getValue()).append(lineSeparator);
         }
 
         builder.append("end");
