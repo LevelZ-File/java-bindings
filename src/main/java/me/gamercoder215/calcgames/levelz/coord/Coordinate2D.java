@@ -124,7 +124,12 @@ public final class Coordinate2D implements Coordinate {
 
     @Override
     public String toString() {
-        return "[" + x + ", " + y + "]";
+        int xInt = (int) x, yInt = (int) y;
+
+        if (x == xInt && y == yInt)
+            return "[" + xInt + ", " + yInt + "]";
+        else
+            return "[" + x + ", " + y + "]";
     }
 
     /**

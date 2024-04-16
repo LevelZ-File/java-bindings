@@ -1,7 +1,6 @@
 package me.gamercoder215.calcgames.levelz.parser;
 
 import me.gamercoder215.calcgames.levelz.*;
-import me.gamercoder215.calcgames.levelz.coord.Coordinate;
 import me.gamercoder215.calcgames.levelz.coord.Coordinate2D;
 import me.gamercoder215.calcgames.levelz.coord.Coordinate3D;
 
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 interface InternalParser {
 

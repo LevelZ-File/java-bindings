@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Represents a Game Coordinate.
  */
-public interface Coordinate {
+public interface Coordinate extends Comparable<Coordinate> {
 
     /**
      * Gets the magnitude of the Coordinate.
@@ -36,6 +36,10 @@ public interface Coordinate {
         if (coords.length == 3) return new Coordinate3D(coords[0], coords[1], coords[2]);
 
         throw new IllegalArgumentException("Invalid Coordinate Length");
+    }
+
+    default int compareTo(@NotNull Coordinate o) {
+        return Double.compare(getMagnitude(), o.getMagnitude());
     }
 
 }
