@@ -131,11 +131,11 @@ public final class Coordinate3D implements Coordinate {
     @Override
     public String toString() {
         int xInt = (int) x, yInt = (int) y, zInt = (int) z;
+        String xs = x == xInt ? String.valueOf(xInt) : String.valueOf(x);
+        String ys = y == yInt ? String.valueOf(yInt) : String.valueOf(y);
+        String zs = z == zInt ? String.valueOf(zInt) : String.valueOf(z);
 
-        if (x == xInt && y == yInt && z == zInt)
-            return "[" + xInt + ", " + yInt + ", " + zInt + "]";
-        else
-            return "[" + x + ", " + y + ", " + z + "]";
+        return "[" + xs + ", " + ys + ", " + zs + "]";
     }
 
     /**

@@ -125,11 +125,10 @@ public final class Coordinate2D implements Coordinate {
     @Override
     public String toString() {
         int xInt = (int) x, yInt = (int) y;
+        String xs = x == xInt ? String.valueOf(xInt) : String.valueOf(x);
+        String ys = y == yInt ? String.valueOf(yInt) : String.valueOf(y);
 
-        if (x == xInt && y == yInt)
-            return "[" + xInt + ", " + yInt + "]";
-        else
-            return "[" + x + ", " + y + "]";
+        return "[" + xs + ", " + ys + "]";
     }
 
     /**
