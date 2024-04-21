@@ -9,7 +9,7 @@ plugins {
 
 val jvm = JavaVersion.VERSION_11
 
-group = "me.gamercoder215.calcgames"
+group = "xyz.calcugames"
 version = "0.2.0"
 
 java {
@@ -103,7 +103,7 @@ artifacts {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "me.gamercoder215.calcgames"
+            groupId = "xyz.calcugames"
             artifactId = "levelz-java"
 
             pom {
