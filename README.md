@@ -56,6 +56,13 @@ dependencies {
 ```
 ## Usage
 
+### Java
+
+```java
+Coordinate2D coordinate2D = new Coordinate2D(1, 2);
+Coordinate3D coordinate3D = new Coordinate3D(1, 2, 3);
+```
+
 ```java
 
 public class Main {
@@ -76,6 +83,13 @@ public class Main {
     }
 }
 
+```
+
+### Kotlin
+
+```kotlin
+val (x, y) = Coordinate2D(1, 2)
+val (x, y, z) = Coordinate3D(1, 2, 3)
 ```
 
 ```kotlin
