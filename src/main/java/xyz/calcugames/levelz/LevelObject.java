@@ -27,6 +27,71 @@ public final class LevelObject implements Comparable<LevelObject> {
     }
 
     /**
+     * Creates a new LevelObject with the given block and coordinate.
+     * @param block Block
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     */
+    public LevelObject(@NotNull Block block, int x, int y) {
+        this(block, new Coordinate2D(x, y));
+    }
+
+    /**
+     * Creates a new LevelObject with the given block and coordinate.
+     * @param name Block Name
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     */
+    public LevelObject(@NotNull String name, int x, int y) {
+        this(new Block(name), new Coordinate2D(x, y));
+    }
+
+    /**
+     * Creates a new LevelObject with the given block and coordinate.
+     * @param name Block Name
+     * @param properties Block Properties
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     */
+    public LevelObject(@NotNull String name, Map<String, Object> properties, int x, int y) {
+        this(new Block(name, properties), new Coordinate2D(x, y));
+    }
+
+    /**
+     * Creates a new LevelObject with the given block and coordinate.
+     * @param block Block
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     * @param z Z Coordinate
+     */
+    public LevelObject(@NotNull Block block, int x, int y, int z) {
+        this(block, new Coordinate3D(x, y, z));
+    }
+
+    /**
+     * Creates a new LevelObject with the given block and coordinate.
+     * @param name Block Name
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     * @param z Z Coordinate
+     */
+    public LevelObject(@NotNull String name, int x, int y, int z) {
+        this(new Block(name), new Coordinate3D(x, y, z));
+    }
+
+    /**
+     * Creates a new LevelObject with the given block and coordinate.
+     * @param name Block Name
+     * @param properties Block Properties
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     * @param z Z Coordinate
+     */
+    public LevelObject(@NotNull String name, Map<String, Object> properties, int x, int y, int z) {
+        this(new Block(name, properties), new Coordinate3D(x, y, z));
+    }
+
+    /**
      * Gets the block of this LevelObject.
      * @return LevelObject Block
      */

@@ -15,6 +15,14 @@ public final class Block {
     private final Map<String, Object> properties;
 
     /**
+     * Creates a new Block with the given name and empty properties.
+     * @param name Block Name
+     */
+    public Block(@NotNull String name) {
+        this(name, Map.of());
+    }
+
+    /**
      * Creates a new Block with the given name and properties.
      * @param name Block Name
      * @param properties Block Properties

@@ -113,9 +113,10 @@ public final class LevelBuilder {
      * Adds a block to the level.
      * @param block Level Block
      * @return this class, for chaining
+     * @throws IllegalArgumentException If the block coordinate is not the same dimension as the level
      */
     @NotNull
-    public LevelBuilder block(@NotNull LevelObject block) {
+    public LevelBuilder block(@NotNull LevelObject block) throws IllegalArgumentException {
         if (dimension.is2D())
             if (!(block.getCoordinate() instanceof Coordinate2D)) throw new IllegalArgumentException("Block Coordinate must be 2D");
 
@@ -124,6 +125,46 @@ public final class LevelBuilder {
 
         blocks.add(block);
         return this;
+    }
+
+    /**
+     * Adds a block to the level.
+     * @param block Block
+     * @param coordinate Coordinate
+     * @return this class, for chaining
+     */
+    @NotNull
+    public LevelBuilder block(@NotNull Block block, @NotNull Coordinate coordinate) {
+        return block(new LevelObject(block, coordinate));
+    }
+
+    /**
+     * Adds a block to the level.
+     * @param block Block
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     * @return this class, for chaining
+     * @throws IllegalArgumentException If the dimension is not 2D
+     */
+    @NotNull
+    public LevelBuilder block(@NotNull Block block, int x, int y) throws IllegalArgumentException {
+        if (!dimension.is2D()) throw new IllegalArgumentException("Block Coordinate cannot be 2D");
+        return block(block, new Coordinate2D(x, y));
+    }
+
+    /**
+     * Adds a block to the level.
+     * @param block Block
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     * @param z Z Coordinate
+     * @return this class, for chaining
+     * @throws IllegalArgumentException If the dimension is not 3D
+     */
+    @NotNull
+    public LevelBuilder block(@NotNull Block block, int x, int y, int z) throws IllegalArgumentException {
+        if (!dimension.is3D()) throw new IllegalArgumentException("Block Coordinate cannot be 3D");
+        return block(block, new Coordinate3D(x, y, z));
     }
 
     /**
@@ -203,6 +244,58 @@ public final class LevelBuilder {
     public LevelBuilder block(@NotNull String name, @NotNull Iterable<Coordinate> coordinates) {
         for (Coordinate c : coordinates)
             block(name, new HashMap<>(), c);
+
+        return this;
+    }
+
+    /**
+     * Performs a block matrix operation.
+     * @param block Block
+     * @param cx Center X
+     * @param cy Center Y
+     * @param x1 First X Coordinate
+     * @param x2 Second X Coordinate
+     * @param y1 First Y Coordinate
+     * @param y2 Second Y Coordinate
+     * @return this class, for chaining
+     * @throws IllegalArgumentException If the dimension is not 2D, or first is bigger than second
+     */
+    @NotNull
+    public LevelBuilder matrix(@NotNull Block block, int cx, int cy, int x1, int x2, int y1, int y2) throws IllegalArgumentException {
+        if (!dimension.is2D()) throw new IllegalArgumentException("2D Matrix is only supported for 2D levels");
+        if (x1 > x2 || y1 > y2) throw new IllegalArgumentException("First coordinate must be smaller than second");
+
+        for (int x = x1; x <= x2; x++)
+            for (int y = y1; y <= y2; y++)
+                block(block, cx + x, cy + y);
+
+        return this;
+    }
+
+    /**
+     * Performs a block matrix operation.
+     * @param block Block
+     * @param cx Center X
+     * @param cy Center Y
+     * @param cz Center Z
+     * @param x1 First X Coordinate
+     * @param x2 Second X Coordinate
+     * @param y1 First Y Coordinate
+     * @param y2 Second Y Coordinat
+     * @param z1 First Z Coordinate
+     * @param z2 Second Z Coordinate
+     * @return this class, for chaining
+     * @throws IllegalArgumentException If the dimension is not 2D, or first is bigger than second
+     */
+    @NotNull
+    public LevelBuilder matrix(@NotNull Block block, int cx, int cy, int cz, int x1, int x2, int y1, int y2, int z1, int z2) throws IllegalArgumentException {
+        if (!dimension.is3D()) throw new IllegalArgumentException("3D Matrix is only supported for 3D levels");
+        if (x1 > x2 || y1 > y2 || z1 > z2) throw new IllegalArgumentException("First coordinate must be smaller than second");
+
+        for (int x = x1; x <= x2; x++)
+            for (int y = y1; y <= y2; y++)
+                for (int z = z1; z <= z2; z++)
+                    block(block, cx + x, cy + y, cz + z);
 
         return this;
     }
