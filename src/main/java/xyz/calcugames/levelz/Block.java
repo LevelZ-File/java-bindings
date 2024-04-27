@@ -87,6 +87,6 @@ public final class Block {
     @Override
     public String toString() {
         if (properties.isEmpty()) return name;
-        return name + "<" + properties + ">";
+        return name + "<" + properties.toString().replaceAll("[{}]", "") + ">";
     }
 }

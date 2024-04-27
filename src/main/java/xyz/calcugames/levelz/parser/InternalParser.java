@@ -190,7 +190,17 @@ interface InternalParser {
     static Block readBlock(String blockLine, Random seed) {
         Block block;
         if (blockLine.startsWith("{") && blockLine.endsWith("}")) {
-            String[] blocks = blockLine.replaceAll("[{}]", "").split(",");
+            String block0 = blockLine.replaceAll("[{}]", "");
+            String[] blocks;
+
+            if (blockLine.contains(">,")) {
+                blocks = block0.split(">,");
+                for (int i = 0; i < blocks.length; i++)
+                    if (blocks[i].contains("<"))
+                        blocks[i] = blocks[i] + '>';
+            } else
+                blocks = block0.split(",");
+
             int l = blocks.length;
 
             Map<String, Double> blockToChance = new HashMap<>();

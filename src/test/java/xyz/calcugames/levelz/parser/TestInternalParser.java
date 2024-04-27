@@ -75,6 +75,10 @@ public class TestInternalParser {
 
         Assertions.assertEquals(new Block("test", Map.of("test", false)), readBlock("{1.0=test<test=false>}", seed));
         Assertions.assertEquals(new Block("grass", Map.of("value", 7)), readBlock("{grass<value=7>}", seed));
+
+        Assertions.assertNotNull(readBlock("{stone,grass,water<value=5>}", seed));
+        Assertions.assertNotNull(readBlock("{wood,grass<value=2,other=4>,water<value=5>}", seed));
+        Assertions.assertNotNull(readBlock("{cobblestone,grass<value=2,other=4>,water<value=5>,magma<temp=0.3,type=lava,wet=false>,air}", seed));
     }
 
     @Test
