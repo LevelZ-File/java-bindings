@@ -13,19 +13,19 @@ Provides Java & Kotlin Parsing/Support for the LevelZ File Format.
 
 Maven
 ```xml
-<!-- Add JitPack Repository -->
+<!-- Add Calculus Games Repository -->
 
 <repositories>
     <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
+        <id>calculus-games</id>
+        <url>https://repo.calcugames.xyz/repository/maven-releases/</url>
     </repository>
 </repositories>
 
 <dependencies>
     <dependency>
-        <groupId>com.github.LevelZ-File</groupId>
-        <artifactId>java-bindings</artifactId>
+        <groupId>xyz.calcugames</groupId>
+        <artifactId>levelz-java</artifactId>
         <version>[VERSION]</version>
     </dependency>
 </dependencies>
@@ -33,25 +33,25 @@ Maven
 
 Gradle (Groovy)
 ```groovy
-// Add JitPack Repository
+// Add Calculus Games Repository
 repositories {
-    maven { url 'https://jitpack.io' }
+    maven { url 'https://repo.calcugames.xyz/repository/maven-releases/' }
 }
 
 dependencies {
-    implementation 'com.github.LevelZ-File:java-bindings:[VERSION]'
+    implementation 'xyz.calcugames:levelz-java:[VERSION]'
 }
 ```
 
 Gradle (Kotlin DSL)
 ```kts
-// Add JitPack Repository
+// Add Calculus Games Repository
 repositories {
-    maven("https://jitpack.io")
+    maven("https://repo.calcugames.xyz/repository/maven-releases/")
 }
 
 dependencies {
-    implementation("com.github.LevelZ-File:java-bindings:[VERSION]")
+    implementation("xyz.calcugames:levelz-java:[VERSION]")
 }
 ```
 ## Usage

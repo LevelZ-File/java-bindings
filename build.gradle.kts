@@ -109,7 +109,7 @@ publishing {
             pom {
                 name = "LevelZ Java API"
                 description = "The Java API for LevelZ"
-                url = "https://levelz.gamercoder215.me"
+                url = "https://levelz.calcugames.xyz"
 
                 licenses {
                     license {
@@ -126,6 +126,19 @@ publishing {
             }
 
             from(components["java"])
+        }
+    }
+
+    repositories {
+        maven {
+            credentials {
+                username = System.getenv("NEXUS_USERNAME")
+                password = System.getenv("NEXUS_PASSWORD")
+            }
+
+            val releases = "https://repo.calcugames.xyz/repository/maven-releases/"
+            val snapshots = "https://repo.calcugames.xyz/repository/maven-snapshots/"
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshots else releases)
         }
     }
 }
