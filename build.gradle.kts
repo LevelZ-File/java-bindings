@@ -10,7 +10,7 @@ plugins {
 val jvm = JavaVersion.VERSION_11
 
 group = "xyz.calcugames"
-version = "0.2.1"
+version = "0.2.1-SNAPSHOT"
 
 java {
     sourceCompatibility = jvm
