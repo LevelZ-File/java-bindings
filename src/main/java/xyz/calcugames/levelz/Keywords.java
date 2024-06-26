@@ -25,4 +25,13 @@ public interface Keywords {
      */
     String DEFAULT_COORDINATE_3D = "[0, 0, 0]";
 
+    /**
+     * The beginning of a comment.
+     */
+    char COMMENT_CHAR = '#';
+
+    /**
+     * The beginning of a comment.
+     */
+    String COMMENT = "#";
 }

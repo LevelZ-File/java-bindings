@@ -256,15 +256,19 @@ interface InternalParser {
 
         Set<LevelObject> blocks = new HashSet<>();
         for (String line : split[1]) {
+            if (line.startsWith(Keywords.COMMENT)) continue;
             if (line.equalsIgnoreCase(Keywords.END)) break;
 
+            int ci = line.indexOf(Keywords.COMMENT_CHAR);
+            String line0 = line.substring(0, ci == -1 ? line.length() : ci).trim();
+
             if (is2D) {
-                Map<Block, Coordinate2D[]> blocks2D = read2DLine(line, seed);
+                Map<Block, Coordinate2D[]> blocks2D = read2DLine(line0, seed);
                 blocks2D.forEach((k, v) -> {
                     for (Coordinate2D c : v) blocks.add(new LevelObject(k, c));
                 });
             } else {
-                Map<Block, Coordinate3D[]> blocks3D = read3DLine(line, seed);
+                Map<Block, Coordinate3D[]> blocks3D = read3DLine(line0, seed);
                 blocks3D.forEach((k, v) -> {
                     for (Coordinate3D c : v) blocks.add(new LevelObject(k, c));
                 });
