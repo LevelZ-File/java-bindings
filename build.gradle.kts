@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     kotlin("jvm") version "2.0.0"
 
@@ -10,7 +12,7 @@ plugins {
 val jvm = JavaVersion.VERSION_11
 
 group = "xyz.calcugames"
-version = "0.2.1-SNAPSHOT"
+version = "0.2.2-SNAPSHOT"
 
 java {
     sourceCompatibility = jvm
@@ -40,8 +42,8 @@ tasks {
     }
 
     compileKotlin {
-        kotlinOptions {
-            jvmTarget = jvm.toString()
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
         }
     }
 
