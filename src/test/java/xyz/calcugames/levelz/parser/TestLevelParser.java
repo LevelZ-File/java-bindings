@@ -37,6 +37,19 @@ public class TestLevelParser {
         Level3D l3 = (Level3D) p3.parse();
 
         Assertions.assertEquals(l3.getSpawn(), new Coordinate3D(0, 0, 0));
+
+        InputStream f4 = TestLevelParser.class.getResourceAsStream("/examples/2D/volcano/4.lvlz");
+        LevelParser p4 = builder.input(f4).build();
+        Level2D l4 = (Level2D) p4.parse();
+
+        Assertions.assertEquals(l4.getScroll(), Scroll.NONE);
+        Assertions.assertEquals(l4.getSpawn(), new Coordinate2D(5, 1));
+
+        InputStream f5 = TestLevelParser.class.getResourceAsStream("/examples/3D/grasslands/3.lvlz");
+        LevelParser p5 = builder.input(f5).build();
+        Level3D l5 = (Level3D) p5.parse();
+
+        Assertions.assertEquals(l5.getSpawn(), new Coordinate3D(0, 10, 0));
     }
 
 }
