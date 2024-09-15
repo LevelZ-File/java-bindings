@@ -15,6 +15,14 @@ public interface Coordinate extends Comparable<Coordinate> {
     double getMagnitude();
 
     /**
+     * Gets the distance between two Coordinates.
+     * @param other Other Coordinate
+     * @return Distance between Coordinates
+     * @throws IllegalArgumentException if the Coordinates are not the same dimension
+     */
+    double getDistance(@NotNull Coordinate other) throws IllegalArgumentException;
+
+    /**
      * Gets the dimension of the Coordinate.
      * @return Coordinate Dimension
      */
@@ -31,9 +39,23 @@ public interface Coordinate extends Comparable<Coordinate> {
      * @param coords Coordinate Array
      * @return A {@linkplain Coordinate2D 2D} or {@linkplain Coordinate3D 3D} Coordinate, depending on array size
      */
+    @NotNull
     static Coordinate fromArray(int[] coords) {
-        if (coords.length == 2) return new Coordinate2D(coords[0], coords[1]);
-        if (coords.length == 3) return new Coordinate3D(coords[0], coords[1], coords[2]);
+        if (coords.length == 2) return new Coordinate2D(coords);
+        if (coords.length == 3) return new Coordinate3D(coords);
+
+        throw new IllegalArgumentException("Invalid Coordinate Length");
+    }
+
+    /**
+     * Creates a Coordinate from an array of doubles.
+     * @param coords Coordinate Array
+     * @return A {@linkplain Coordinate2D 2D} or {@linkplain Coordinate3D 3D} Coordinate, depending on array size
+     */
+    @NotNull
+    static Coordinate fromArray(double[] coords) {
+        if (coords.length == 2) return new Coordinate2D(coords);
+        if (coords.length == 3) return new Coordinate3D(coords);
 
         throw new IllegalArgumentException("Invalid Coordinate Length");
     }

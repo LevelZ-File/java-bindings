@@ -105,6 +105,15 @@ public final class Coordinate3D implements Coordinate {
     }
 
     @Override
+    public double getDistance(Coordinate coordinate) {
+        if (coordinate == null) throw new IllegalArgumentException("other cannot be null");
+        if (!(coordinate instanceof Coordinate2D)) throw new IllegalArgumentException("Coordinate must be 3D");
+
+        Coordinate3D other = (Coordinate3D) coordinate;
+        return Math.sqrt(Math.pow(other.x - x, 2) + Math.pow(other.y - y, 2) + Math.pow(other.z - z, 2));
+    }
+
+    @Override
     public double getMagnitude() {
         return Math.sqrt((x * x) + (y * y) + (z * z));
     }
