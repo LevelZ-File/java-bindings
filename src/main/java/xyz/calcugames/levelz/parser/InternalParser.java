@@ -3,6 +3,8 @@ package xyz.calcugames.levelz.parser;
 import xyz.calcugames.levelz.*;
 import xyz.calcugames.levelz.coord.Coordinate2D;
 import xyz.calcugames.levelz.coord.Coordinate3D;
+import xyz.calcugames.levelz.coord.CoordinateMatrix2D;
+import xyz.calcugames.levelz.coord.CoordinateMatrix3D;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -109,21 +111,9 @@ interface InternalParser {
             String s = s0.trim();
             if (s.isEmpty()) continue;
 
-            if (s.startsWith("(") && s.endsWith("]")) {
-                String[] split = s.split("\\^");
-
-                String[] coords = split[1].replaceAll("[\\[\\]\\s]", "").split(",");
-                String[] matrix = split[0].replaceAll("[()\\s]", "").split(",");
-
-                double cx = Double.parseDouble(coords[0]), cy = Double.parseDouble(coords[1]);
-
-                int x1 = Integer.parseInt(matrix[0]), x2 = Integer.parseInt(matrix[1]);
-                int y1 = Integer.parseInt(matrix[2]), y2 = Integer.parseInt(matrix[3]);
-
-                for (int x = Math.min(x1, x2); x <= Math.max(x1, x2); x++)
-                    for (int y = Math.min(y1, y2); y <= Math.max(y1, y2); y++)
-                        points.add(new Coordinate2D(cx + x, cy + y));
-            } else
+            if (s.startsWith("(") && s.endsWith("]"))
+                points.addAll(CoordinateMatrix2D.fromString(s).getCoordinates());
+            else
                 points.add(Coordinate2D.fromString(s));
         }
 
@@ -138,23 +128,9 @@ interface InternalParser {
             String s = s0.trim();
             if (s.isEmpty()) continue;
 
-            if (s.startsWith("(") && s.endsWith("]")) {
-                String[] split = s.split("\\^");
-                
-                String[] coords = split[1].replaceAll("[\\[\\]\\s]", "").split(",");
-                String[] matrix = split[0].replaceAll("[()\\s]", "").split(",");
-                
-                double cx = Double.parseDouble(coords[0]), cy = Double.parseDouble(coords[1]), cz = Double.parseDouble(coords[2]);
-                
-                int x1 = Integer.parseInt(matrix[0]), x2 = Integer.parseInt(matrix[1]);
-                int y1 = Integer.parseInt(matrix[2]), y2 = Integer.parseInt(matrix[3]);
-                int z1 = Integer.parseInt(matrix[4]), z2 = Integer.parseInt(matrix[5]);
-
-                for (int x = Math.min(x1, x2); x <= Math.max(x1, x2); x++)
-                    for (int y = Math.min(y1, y2); y <= Math.max(y1, y2); y++)
-                        for (int z = Math.min(z1, z2); z <= Math.max(z1, z2); z++)
-                            points.add(new Coordinate3D(cx + x, cy + y, cz + z));
-            } else
+            if (s.startsWith("(") && s.endsWith("]"))
+                points.addAll(CoordinateMatrix3D.fromString(s).getCoordinates());
+            else
                 points.add(Coordinate3D.fromString(s));
         }
         
