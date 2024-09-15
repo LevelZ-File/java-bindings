@@ -4,6 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
@@ -77,7 +79,7 @@ public final class LevelExporter {
             
             for (LevelObject block : blocks)
                 if (blockMap.containsKey(block.getBlock()))
-                    blockMap.put(block.getBlock(), blockMap.get(block.getBlock()) + "*" + block.getCoordinate().toString());
+                    blockMap.put(block.getBlock(), blockMap.get(block.getBlock()) + "*" + block.getCoordinate());
                 else
                     blockMap.put(block.getBlock(), block.getCoordinate().toString());
             
@@ -90,11 +92,49 @@ public final class LevelExporter {
     }
 
     /**
+     * <p>Writes to a byte array using the default charset.</p>
+     * <p>The exporter will only write to the byte buffer if there is enough space, stopping if the length if too small.</p>
+     * @param data Byte Array to encode into
+     * @throws IllegalArgumentException if the data is null
+     */
+    public void writeToByteArray(byte[] data) throws IllegalArgumentException {
+        writeToByteArray(data, Charset.defaultCharset());
+    }
+
+    /**
+     * <p>Writes to a byte array.</p>
+     * <p>The exporter will only write to the byte buffer if there is enough space, stopping if the length if too small.</p>
+     * @param data Byte Array to encode into
+     * @param charset Charset to encode bytes with
+     * @throws IllegalArgumentException if the data or charset is null
+     */
+    public void writeToByteArray(byte[] data, @NotNull Charset charset) throws IllegalArgumentException {
+        if (data == null) throw new IllegalArgumentException("Data cannot be null");
+        if (charset == null) throw new IllegalArgumentException("Charset cannot be null");
+
+        String string = writeToString();
+        byte[] bytes = string.getBytes(charset);
+        System.arraycopy(bytes, 0, data, 0, Math.min(bytes.length, data.length));
+    }
+
+    /**
+     * Writes to a file using the default charset. This will create the file if it does not exist.
+     * @param file File
+     * @throws IllegalArgumentException if the file is null
+     */
+    public void writeToFile(@NotNull File file) throws IllegalArgumentException {
+        writeToFile(file, Charset.defaultCharset());
+    }
+
+    /**
      * Writes to a file. This will create the file if it does not exist.
      * @param file File
+     * @param charset Charset to encode bytes with
+     * @throws IllegalArgumentException if the file or charset is null
      */
-    public void writeToFile(@NotNull File file) {
+    public void writeToFile(@NotNull File file, @NotNull Charset charset) throws IllegalArgumentException {
         if (file == null) throw new IllegalArgumentException("File cannot be null");
+        if (charset == null) throw new IllegalArgumentException("Charset cannot be null");
 
         if (!file.exists())
             try {
@@ -103,19 +143,58 @@ public final class LevelExporter {
                 throw new RuntimeException(e);
             }
 
-        writeToPath(file.toPath());
+        writeToPath(file.toPath(), charset);
+    }
+
+    /**
+     * Writes to a file path using the default charset.
+     * @param file File Path
+     * @throws IllegalArgumentException if the path is null
+     */
+    public void writeToPath(@NotNull Path file) throws IllegalArgumentException {
+        writeToPath(file, Charset.defaultCharset());
     }
 
     /**
      * Writes to a file path.
      * @param file File Path
+     * @param charset Charset to encode bytes with
+     * @throws IllegalArgumentException if the path or charset is null
      */
-    public void writeToPath(@NotNull Path file) {
+    public void writeToPath(@NotNull Path file, @NotNull Charset charset) throws IllegalArgumentException {
         if (file == null) throw new IllegalArgumentException("Path cannot be null");
+        if (charset == null) throw new IllegalArgumentException("Charset cannot be null");
 
         String data = writeToString();
         try {
-            Files.write(file, data.getBytes());
+            Files.write(file, data.getBytes(charset));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Writes this level to an output stream using the default charset.
+     * @param stream Output Stream
+     * @throws IllegalArgumentException if the stream is null
+     */
+    public void writeToStream(@NotNull OutputStream stream) throws IllegalArgumentException {
+        writeToStream(stream, Charset.defaultCharset());
+    }
+
+    /**
+     * Writes this level to an output stream.
+     * @param stream Output Stream
+     * @param charset Charset to encode bytes with
+     * @throws IllegalArgumentException if the stream or charset is null
+     */
+    public void writeToStream(@NotNull OutputStream stream, @NotNull Charset charset) throws IllegalArgumentException {
+        if (stream == null) throw new IllegalArgumentException("Stream cannot be null");
+        if (charset == null) throw new IllegalArgumentException("Charset cannot be null");
+
+        String data = writeToString();
+        try {
+            stream.write(data.getBytes(charset));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

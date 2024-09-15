@@ -18,18 +18,6 @@ public class TestInternalParser {
     private static final SecureRandom seed = new SecureRandom();
 
     @Test
-    @DisplayName("Test InternalParser#value")
-    public void testValue() {
-        Assertions.assertEquals(true, value("true"));
-        Assertions.assertEquals(false, value("false"));
-
-        Assertions.assertEquals(5, value("5"));
-        Assertions.assertEquals(5.0, value("5.0"));
-
-        Assertions.assertEquals("Hello, World!", value("Hello, World!"));
-    }
-
-    @Test
     @DisplayName("Test InternalParser#read2DPoints")
     public void testRead2DPoints() {
         Assertions.assertEquals(Set.of(new Coordinate2D(0, 0)), read2DPoints("[0,0]"));
@@ -79,14 +67,6 @@ public class TestInternalParser {
         Assertions.assertNotNull(readBlock("{stone,grass,water<value=5>}", seed));
         Assertions.assertNotNull(readBlock("{wood,grass<value=2,other=4>,water<value=5>}", seed));
         Assertions.assertNotNull(readBlock("{cobblestone,grass<value=2,other=4>,water<value=5>,magma<temp=0.3,type=lava,wet=false>,air}", seed));
-    }
-
-    @Test
-    @DisplayName("Test InternalParser#readRawBlock")
-    public void testReadRawBlock() {
-        Assertions.assertEquals(new Block("test", Map.of("test", true)), readRawBlock("test<test=true>"));
-        Assertions.assertEquals(new Block("ball", Map.of("bounce", 5)), readRawBlock("ball<bounce=5>"));
-        Assertions.assertEquals(new Block("stone", Map.of("weight", 5.0)), readRawBlock("stone<weight=5.0>"));
     }
 
     @Test

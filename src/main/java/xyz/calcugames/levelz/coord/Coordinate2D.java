@@ -36,6 +36,25 @@ public final class Coordinate2D implements Coordinate {
      * @param x X Value
      * @param y Y Value
      */
+    public Coordinate2D(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Constructs a 2D Coordinate.
+     * @param xy Array of X and Y Values
+     */
+    public Coordinate2D(float[] xy) {
+        this.x = xy[0];
+        this.y = xy[1];
+    }
+
+    /**
+     * Constructs a 2D Coordinate.
+     * @param x X Value
+     * @param y Y Value
+     */
     public Coordinate2D(double x, double y) {
         this.x = x;
         this.y = y;
@@ -96,6 +115,15 @@ public final class Coordinate2D implements Coordinate {
      */
     public void setY(double y) {
         this.y = y;
+    }
+
+    @Override
+    public double getDistance(@NotNull Coordinate coordinate) {
+        if (coordinate == null) throw new IllegalArgumentException("other cannot be null");
+        if (!(coordinate instanceof Coordinate2D)) throw new IllegalArgumentException("Coordinate must be 2D");
+
+        Coordinate2D other = (Coordinate2D) coordinate;
+        return Math.sqrt(Math.pow(other.x - x, 2) + Math.pow(other.y - y, 2));
     }
 
     @Override

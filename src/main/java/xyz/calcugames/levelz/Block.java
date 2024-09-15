@@ -1,8 +1,13 @@
 package xyz.calcugames.levelz;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import xyz.calcugames.levelz.parser.Errors;
+import xyz.calcugames.levelz.parser.LevelParser;
+import xyz.calcugames.levelz.parser.ParseException;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -88,5 +93,32 @@ public final class Block {
     public String toString() {
         if (properties.isEmpty()) return name;
         return name + "<" + properties.toString().replaceAll("[{}]", "") + ">";
+    }
+
+    /**
+     * Converts a string into a Block.
+     * @param string The string to convert.
+     * @return The Block, or null if the string is empty.
+     */
+    @Nullable
+    public static Block fromString(@NotNull String string) {
+        if (string.isEmpty()) return null;
+
+        String[] split = string.replaceAll("[\\s>]", "").split("<");
+        String name = split[0].trim();
+
+        if (split.length < 2) return new Block(name, Map.of());
+
+        Map<String, Object> properties = new HashMap<>();
+        String[] props = split[1].split(",");
+
+        for (String entry : props) {
+            String[] kv = entry.split("=");
+            if (kv.length < 2) throw new ParseException(String.format(Errors.INVALID_BLOCK, string));
+
+            properties.put(kv[0], LevelParser.value(kv[1]));
+        }
+
+        return new Block(name, properties);
     }
 }

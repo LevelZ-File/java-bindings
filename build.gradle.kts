@@ -9,10 +9,11 @@ plugins {
     signing
 }
 
+val v = "0.3.0"
 val jvm = JavaVersion.VERSION_11
 
 group = "xyz.calcugames"
-version = "0.2.2-SNAPSHOT"
+version = if (project.hasProperty("snapshot")) "$v-SNAPSHOT" else v
 
 java {
     sourceCompatibility = jvm
