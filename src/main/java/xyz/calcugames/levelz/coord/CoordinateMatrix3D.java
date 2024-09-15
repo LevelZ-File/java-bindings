@@ -37,6 +37,8 @@ public final class CoordinateMatrix3D extends CoordinateMatrix {
      * @param start The starting coordinate.
      */
     public CoordinateMatrix3D(int minX, int maxX, int minY, int maxY, int minZ, int maxZ, Coordinate3D start) {
+        super(Dimension.THREE);
+
         if (minX > maxX) throw new IllegalArgumentException("minX must be less than or equal to maxX");
         if (minY > maxY) throw new IllegalArgumentException("minY must be less than or equal to maxY");
         if (minZ > maxZ) throw new IllegalArgumentException("minZ must be less than or equal to maxZ");
@@ -49,11 +51,6 @@ public final class CoordinateMatrix3D extends CoordinateMatrix {
         this.minZ = minZ;
         this.maxZ = maxZ;
         this.start = start;
-    }
-
-    @Override
-    public Dimension getDimension() {
-        return Dimension.THREE;
     }
 
     @Override

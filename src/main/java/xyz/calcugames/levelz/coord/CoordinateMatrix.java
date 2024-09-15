@@ -12,12 +12,23 @@ import java.util.Set;
 @SuppressWarnings("unchecked")
 public abstract class CoordinateMatrix implements Iterable<Coordinate> {
 
+    private final Dimension dimension;
+
+    /**
+     * Creates a new Coordinate Matrix.
+     */
+    protected CoordinateMatrix(@NotNull Dimension dimension) {
+        this.dimension = dimension;
+    }
+
     /**
      * Gets the dimension of the matrix.
      * @return The dimension of the matrix.
      */
     @NotNull
-    public abstract Dimension getDimension();
+    public final Dimension getDimension() {
+        return dimension;
+    }
 
     /**
      * Gets the coordinates in the matrix.

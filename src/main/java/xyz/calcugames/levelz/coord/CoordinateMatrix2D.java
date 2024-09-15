@@ -33,6 +33,8 @@ public final class CoordinateMatrix2D extends CoordinateMatrix {
      * @param start The starting coordinate.
      */
     public CoordinateMatrix2D(int minX, int maxX, int minY, int maxY, @NotNull Coordinate2D start) {
+        super(Dimension.TWO);
+
         if (minX > maxX) throw new IllegalArgumentException("minX must be less than or equal to maxX");
         if (minY > maxY) throw new IllegalArgumentException("minY must be less than or equal to maxY");
         if (start == null) throw new IllegalArgumentException("start cannot be null");
@@ -42,12 +44,6 @@ public final class CoordinateMatrix2D extends CoordinateMatrix {
         this.minY = minY;
         this.maxY = maxY;
         this.start = start;
-    }
-
-    @Override
-    @NotNull
-    public Dimension getDimension() {
-        return Dimension.TWO;
     }
 
     @Override
