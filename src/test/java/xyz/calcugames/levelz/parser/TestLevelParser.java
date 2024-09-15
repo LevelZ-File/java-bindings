@@ -11,9 +11,23 @@ import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
 
+import static xyz.calcugames.levelz.parser.LevelParser.value;
+
 public class TestLevelParser {
 
     private static final LevelParser.Builder builder = LevelParser.builder();
+
+    @Test
+    @DisplayName("Test LevelParser#value")
+    public void testValue() {
+        Assertions.assertEquals(true, value("true"));
+        Assertions.assertEquals(false, value("false"));
+
+        Assertions.assertEquals(5, value("5"));
+        Assertions.assertEquals(5.0, value("5.0"));
+
+        Assertions.assertEquals("Hello, World!", value("Hello, World!"));
+    }
 
     @Test
     @DisplayName("Test LevelParser#parse")

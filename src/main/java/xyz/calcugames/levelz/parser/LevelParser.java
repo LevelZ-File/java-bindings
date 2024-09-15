@@ -1,5 +1,6 @@
 package xyz.calcugames.levelz.parser;
 
+import org.jetbrains.annotations.Nullable;
 import xyz.calcugames.levelz.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -149,6 +150,37 @@ public abstract class LevelParser {
                     return InternalParser.parse(lines, seed);
                 }
             };
+        }
+    }
+
+    // Utilities
+
+    /**
+     * <p>Converts a string to an object value.</p>
+     * <p>This will do the following:</p>
+     * <ul>
+     *     <li>Convert {@code true} and {@code false} to a boolean primitive</li>
+     *     <li>Attempt to convert integers into a integer primitive</li>
+     *     <li>Attempt to convert doubles into a double primitive</li>
+     *     <li>Otherwise, return the raw string</li>
+     * </ul>
+     * @param str String to convert
+     * @return Object value
+     */
+    @Nullable
+    public static Object value(@Nullable String str) {
+        if (str == null) return null;
+        if (str.equalsIgnoreCase("true")) return true;
+        if (str.equalsIgnoreCase("false")) return false;
+
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            try {
+                return Double.parseDouble(str);
+            } catch (NumberFormatException e1) {
+                return str;
+            }
         }
     }
 

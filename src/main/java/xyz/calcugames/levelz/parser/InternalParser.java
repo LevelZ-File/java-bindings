@@ -28,21 +28,6 @@ interface InternalParser {
         return lines;
     }
 
-    static Object value(String str) {
-        if (str.equalsIgnoreCase("true")) return true;
-        if (str.equalsIgnoreCase("false")) return false;
-
-        try {
-            return Integer.parseInt(str);
-        } catch (NumberFormatException e) {
-            try {
-                return Double.parseDouble(str);
-            } catch (NumberFormatException e1) {
-                return str;
-            }
-        }
-    }
-
     static <T> T roll(Map<T, Double> map, Random seed) {
         double sum = map.values().stream().mapToDouble(Double::doubleValue).sum();
         if (sum > 1.0)
@@ -190,32 +175,11 @@ interface InternalParser {
 
             }
 
-            block = readRawBlock(roll(blockToChance, seed));
+            block = Block.fromString(roll(blockToChance, seed));
         } else
-            block = readRawBlock(blockLine);
+            block = Block.fromString(blockLine);
 
         return block;
-    }
-
-    static Block readRawBlock(String input) {
-        if (input.isEmpty()) return null;
-
-        String[] split = input.replaceAll("[\\s>]", "").split("<");
-        String name = split[0].trim();
-
-        if (split.length < 2) return new Block(name, Map.of());
-
-        Map<String, Object> properties = new HashMap<>();
-        String[] props = split[1].split(",");
-
-        for (String entry : props) {
-            String[] kv = entry.split("=");
-            if (kv.length < 2) throw new ParseException(String.format(Errors.INVALID_BLOCK, input));
-
-            properties.put(kv[0], value(kv[1]));
-        }
-
-        return new Block(name, properties);
     }
 
     static Level parse(String[] file, Random seed) {
