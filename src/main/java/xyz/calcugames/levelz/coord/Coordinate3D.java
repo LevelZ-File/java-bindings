@@ -40,6 +40,28 @@ public final class Coordinate3D implements Coordinate {
      * @param y Y Value
      * @param z Z Value
      */
+    public Coordinate3D(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    /**
+     * Constructs a 3D Coordinate.
+     * @param xyz Array of X, Y, and Z Values
+     */
+    public Coordinate3D(float[] xyz) {
+        this.x = xyz[0];
+        this.y = xyz[1];
+        this.z = xyz[2];
+    }
+
+    /**
+     * Constructs a 3D Coordinate.
+     * @param x X Value
+     * @param y Y Value
+     * @param z Z Value
+     */
     public Coordinate3D(double x, double y, double z) {
         this.x = x;
         this.y = y;

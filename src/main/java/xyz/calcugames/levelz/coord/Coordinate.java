@@ -48,6 +48,19 @@ public interface Coordinate extends Comparable<Coordinate> {
     }
 
     /**
+     * Creates a Coordinate from an array of floats.
+     * @param coords Coordinate Array
+     * @return A {@linkplain Coordinate2D 2D} or {@linkplain Coordinate3D 3D} Coordinate, depending on array size
+     */
+    @NotNull
+    static Coordinate fromArray(float[] coords) {
+        if (coords.length == 2) return new Coordinate2D(coords);
+        if (coords.length == 3) return new Coordinate3D(coords);
+
+        throw new IllegalArgumentException("Invalid Coordinate Length");
+    }
+
+    /**
      * Creates a Coordinate from an array of doubles.
      * @param coords Coordinate Array
      * @return A {@linkplain Coordinate2D 2D} or {@linkplain Coordinate3D 3D} Coordinate, depending on array size

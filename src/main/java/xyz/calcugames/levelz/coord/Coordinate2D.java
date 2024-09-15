@@ -36,6 +36,25 @@ public final class Coordinate2D implements Coordinate {
      * @param x X Value
      * @param y Y Value
      */
+    public Coordinate2D(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * Constructs a 2D Coordinate.
+     * @param xy Array of X and Y Values
+     */
+    public Coordinate2D(float[] xy) {
+        this.x = xy[0];
+        this.y = xy[1];
+    }
+
+    /**
+     * Constructs a 2D Coordinate.
+     * @param x X Value
+     * @param y Y Value
+     */
     public Coordinate2D(double x, double y) {
         this.x = x;
         this.y = y;
