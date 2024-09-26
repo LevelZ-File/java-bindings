@@ -60,6 +60,10 @@ jobs:
     timeout-minutes: 10
     needs: setup
 
+    permissions:
+      checks: write
+      pull-requests: write
+
     name: Test Project
     steps:
       - uses: actions/checkout@v4
