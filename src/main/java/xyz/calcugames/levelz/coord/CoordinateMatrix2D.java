@@ -20,6 +20,12 @@ public final class CoordinateMatrix2D extends CoordinateMatrix {
     private final int maxY;
     private final Coordinate2D start;
 
+    /**
+     * Creates a new 2D matrix of coordinates with minimum values of 0.
+     * @param x The x value.
+     * @param y The y value.
+     * @param start The starting coordinate.
+     */
     public CoordinateMatrix2D(int x, int y, @NotNull Coordinate2D start) {
         this(0, x, 0, y, start);
     }

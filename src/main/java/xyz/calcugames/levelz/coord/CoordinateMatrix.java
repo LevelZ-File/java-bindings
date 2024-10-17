@@ -16,6 +16,7 @@ public abstract class CoordinateMatrix implements Iterable<Coordinate> {
 
     /**
      * Creates a new Coordinate Matrix.
+     * @param dimension The dimension of the matrix.
      */
     protected CoordinateMatrix(@NotNull Dimension dimension) {
         this.dimension = dimension;

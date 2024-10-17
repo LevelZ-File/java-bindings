@@ -22,6 +22,13 @@ public final class CoordinateMatrix3D extends CoordinateMatrix {
     private final int maxZ;
     private final Coordinate3D start;
 
+    /**
+     * Creates a new 3D matrix of coordinates with minimum values of 0.
+     * @param x The x value.
+     * @param y The y value.
+     * @param z The z value.
+     * @param start The starting coordinate.
+     */
     public CoordinateMatrix3D(int x, int y, int z, Coordinate3D start) {
         this(0, x, 0, y, 0, z, start);
     }
