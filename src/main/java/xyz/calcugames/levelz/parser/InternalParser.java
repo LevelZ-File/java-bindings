@@ -23,6 +23,7 @@ interface InternalParser {
         } catch (IOException e) {
             logger.severe("Failed to close reader");
             logger.log(java.util.logging.Level.SEVERE, e.getMessage(), e);
+            throw new ParseException(Errors.FAILED_TO_CLOSE_READER);
         }
 
         return lines;
@@ -80,10 +81,10 @@ interface InternalParser {
         }
 
         if (!headers0.containsKey("type"))
-            throw new xyz.calcugames.levelz.parser.MissingHeaderException(Errors.MISSING_DIMENSION_TYPE);
+            throw new MissingHeaderException(Errors.MISSING_DIMENSION_TYPE);
 
         if (!headers0.containsKey("spawn"))
-            throw new xyz.calcugames.levelz.parser.MissingHeaderException(Errors.MISSING_SPAWNPOINT);
+            throw new MissingHeaderException(Errors.MISSING_SPAWNPOINT);
 
         return headers0;
     }
