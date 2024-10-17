@@ -16,6 +16,9 @@ public class TestCoordinateMatrix2D {
         CoordinateMatrix2D m2 = new CoordinateMatrix2D(-4, 4, -4, 4, new Coordinate2D(1, 1));
         Assertions.assertEquals(81, m2.getCoordinates().size());
         Assertions.assertTrue(m2.getCoordinates().contains(new Coordinate2D(1, 1)));
+
+        CoordinateMatrix2D m3 = new CoordinateMatrix2D(4, 4, new Coordinate2D(0, 0));
+        Assertions.assertEquals(m1, m3);
     }
 
 }

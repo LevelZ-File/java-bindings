@@ -40,6 +40,16 @@ public class TestCoordinate3D {
         Coordinate3D d = new Coordinate3D(-11, -45.75, 88);
         Assertions.assertEquals(d.toString(), "[-11, -45.75, 88]");
         Assertions.assertEquals(d, Coordinate3D.fromString(d.toString()));
+
+        Coordinate3D e1 = new Coordinate3D(0, 0, 0);
+        Coordinate3D e2 = new Coordinate3D(8, 8, 8);
+        Assertions.assertEquals(Math.sqrt(192), e1.getDistance(e2));
+
+        e2.setX(4);
+        e2.setY(4);
+        e2.setZ(4);
+
+        Assertions.assertEquals(Math.sqrt(48), e1.getDistance(e2));
     }
 
 }

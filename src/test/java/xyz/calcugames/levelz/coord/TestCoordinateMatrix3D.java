@@ -16,6 +16,9 @@ public class TestCoordinateMatrix3D {
         CoordinateMatrix3D m2 = new CoordinateMatrix3D(-4, 4, -4, 4, -4, 4, new Coordinate3D(1, 1, 1));
         Assertions.assertEquals(729, m2.getCoordinates().size());
         Assertions.assertTrue(m2.getCoordinates().contains(new Coordinate3D(1, 1, 1)));
+
+        CoordinateMatrix3D m3 = new CoordinateMatrix3D(4, 4, 4, new Coordinate3D(0, 0, 0));
+        Assertions.assertEquals(m1, m3);
     }
 
 }

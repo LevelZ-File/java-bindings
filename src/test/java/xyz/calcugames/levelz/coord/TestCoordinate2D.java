@@ -32,6 +32,7 @@ public class TestCoordinate2D {
         Coordinate2D b = new Coordinate2D(3, 4);
         Assertions.assertEquals(b.toString(), "[3, 4]");
         Assertions.assertEquals(b, Coordinate2D.fromString(b.toString()));
+        Assertions.assertEquals(5, b.getMagnitude());
 
         Coordinate2D c = new Coordinate2D(2.5, -1.25);
         Assertions.assertEquals(c.toString(), "[2.5, -1.25]");
@@ -40,6 +41,15 @@ public class TestCoordinate2D {
         Coordinate2D d = new Coordinate2D(-7, 9.5);
         Assertions.assertEquals(d.toString(), "[-7, 9.5]");
         Assertions.assertEquals(d, Coordinate2D.fromString(d.toString()));
+
+        Coordinate2D e1 = new Coordinate2D(0, 0);
+        Coordinate2D e2 = new Coordinate2D(8, 8);
+        Assertions.assertEquals(Math.sqrt(128), e1.getDistance(e2));
+
+        e2.setX(4);
+        e2.setY(4);
+
+        Assertions.assertEquals(Math.sqrt(32), e1.getDistance(e2));
     }
 
 }
