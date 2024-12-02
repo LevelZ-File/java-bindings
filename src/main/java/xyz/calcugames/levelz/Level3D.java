@@ -29,7 +29,7 @@ public class Level3D extends Level {
      */
     public Level3D(@NotNull Map<String, String> headers) {
         super(headers);
-        this.spawn = Coordinate3D.fromString(headers.get("spawn"));
+        this.spawn = Coordinate3D.fromString(headers.getOrDefault("spawn", "[0, 0, 0]"));
     }
 
     /**

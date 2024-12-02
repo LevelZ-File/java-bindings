@@ -9,7 +9,7 @@ plugins {
     signing
 }
 
-val v = "0.3.0"
+val v = "0.3.1"
 val jvm = JavaVersion.VERSION_11
 
 group = "xyz.calcugames"

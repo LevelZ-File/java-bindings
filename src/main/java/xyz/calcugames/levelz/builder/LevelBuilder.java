@@ -249,6 +249,31 @@ public final class LevelBuilder {
     }
 
     /**
+     * Adds a block with no properties to the level.
+     * @param name Block Name
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     * @return this class, for chaining
+     */
+    @NotNull
+    public LevelBuilder block(@NotNull String name, int x, int y) {
+        return block(name, new Coordinate2D(x, y));
+    }
+
+    /**
+     * Adds a block with no properties to the level.
+     * @param name Block Name
+     * @param x X Coordinate
+     * @param y Y Coordinate
+     * @param z Z Coordinate
+     * @return this class, for chaining
+     */
+    @NotNull
+    public LevelBuilder block(@NotNull String name, int x, int y, int z) {
+        return block(name, new Coordinate3D(x, y, z));
+    }
+
+    /**
      * Performs a block matrix operation.
      * @param block Block
      * @param cx Center X

@@ -31,8 +31,8 @@ public class Level2D extends Level {
      */
     public Level2D(@NotNull Map<String, String> headers) {
         super(headers);
-        this.spawn = Coordinate2D.fromString(headers.get("spawn"));
-        this.scroll = Scroll.valueOf(headers.get("scroll").replace('-', '_').toUpperCase());
+        this.spawn = Coordinate2D.fromString(headers.getOrDefault("spawn", "[0, 0]"));
+        this.scroll = Scroll.valueOf(headers.getOrDefault("scroll", "NONE").replace('-', '_').toUpperCase());
     }
 
     /**
