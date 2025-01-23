@@ -27,7 +27,7 @@ repositories {
 
 dependencies {
     compileOnly(kotlin("stdlib"))
-    compileOnly("org.jetbrains:annotations:26.0.1")
+    compileOnly("org.jetbrains:annotations:26.0.2")
 
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
