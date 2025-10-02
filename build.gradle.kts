@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.20"
 
     java
     `maven-publish`
@@ -27,10 +27,10 @@ repositories {
 
 dependencies {
     compileOnly(kotlin("stdlib"))
-    compileOnly("org.jetbrains:annotations:26.0.2")
+    compileOnly("org.jetbrains:annotations:26.0.2-1")
 
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.13.3")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.14.0")
 }
 
 tasks {
