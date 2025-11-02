@@ -30,7 +30,7 @@ dependencies {
     compileOnly("org.jetbrains:annotations:26.0.2-1")
 
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.14.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
 }
 
 tasks {
